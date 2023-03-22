@@ -21,8 +21,8 @@
 	<div style="width: 100%; display: flex; justify-content: space-between">
 		<h1>Listado de usuarios</h1>
 
-		<button type="button" class="btn btn-primary pull rigth btn-lg">Añadir
-			usuario</button>
+		<button type="button" class="btn btn-primary pull rigth btn-lg"><a style="color:white" href="InsertarUsuario">Añadir
+			usuario</a></button>
 
 	</div>
 
