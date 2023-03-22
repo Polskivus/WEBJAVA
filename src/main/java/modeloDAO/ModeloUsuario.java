@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.eclipse.jdt.internal.compiler.ast.SuperReference;
+
 import conexion.Conexion;
 import modelo.Usuario;
 
@@ -38,6 +40,24 @@ public class ModeloUsuario extends Conexion {
 		}
 
 		return users;
+	}
+
+	public void deluseres(int id) {
+
+		String delete = "DELETE FROM users WHERE id=?";
+
+		try {
+
+			PreparedStatement deleteuser = super.conexion.prepareStatement(delete);
+
+			deleteuser.setInt(1, id);
+
+			deleteuser.execute();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
