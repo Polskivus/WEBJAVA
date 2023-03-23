@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%  %>
 
 	<form method="post" action="InsertarUsuario">
 		<label for="nombre">Nombre</label> <input type="text" name="nombre">

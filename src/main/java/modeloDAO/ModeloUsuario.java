@@ -82,30 +82,32 @@ public class ModeloUsuario extends Conexion {
 
 	}
 
-	public Usuario verUnUsuario(int id) {
+	public Usuario getUsuario(int id) {
 
-		Usuario user = new Usuario();
-
-		String unUsuario = "SELECT * FROM useres WHERE id=?";
+		String sqlElegiruno = "select * from users where id=?";
 
 		try {
 
-			PreparedStatement Veruno = super.conexion.prepareStatement(unUsuario);
-			ResultSet resultSet = Veruno.executeQuery(unUsuario);
+			PreparedStatement pStatement = super.conexion.prepareStatement(sqlElegiruno);
+			pStatement.setInt(1, id);
+			ResultSet resultSet = pStatement.executeQuery();
 
-			while (resultSet.next()) {
+			if (resultSet.next()) {
 
+				Usuario user = new Usuario();
+				
+				user.setId(resultSet.getInt("id"));
 				user.setNombre(resultSet.getString("nombre"));
 				user.setDni(resultSet.getString("dni"));
 				user.setEdad(resultSet.getInt("edad"));
 
+				return user;
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return user;
+		return null;
 	}
 
 	public void modificarUser(Usuario usuario) {
@@ -119,6 +121,8 @@ public class ModeloUsuario extends Conexion {
 			modifyuser.setString(1, usuario.getNombre());
 			modifyuser.setString(2, usuario.getDni());
 			modifyuser.setInt(3, usuario.getEdad());
+			
+			modifyuser.setInt(4, usuario.getId());
 
 		} catch (Exception e) {
 			// TODO: handle exception

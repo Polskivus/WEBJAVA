@@ -39,7 +39,7 @@ public class EditarUsusario extends HttpServlet {
 
 		buser.abrirconexion();
 
-		Usuario useramodificar = buser.verUnUsuario(id);
+		Usuario useramodificar = buser.getUsuario(id);
 
 		request.setAttribute("user", useramodificar);
 
@@ -55,14 +55,16 @@ public class EditarUsusario extends HttpServlet {
 			throws ServletException, IOException {
 
 		ModeloUsuario buser = new ModeloUsuario();
+		buser.abrirconexion();
 
+		int id = Integer.parseInt(request.getParameter("id"));
 		String nombre = request.getParameter("nombre");
 		String dni = request.getParameter("dni");
 		int edad = Integer.parseInt(request.getParameter("edad"));
 
-		buser.abrirconexion();
 		Usuario usuario = new Usuario();
 
+		usuario.setId(id);
 		usuario.setNombre(nombre);
 		usuario.setDni(dni);
 		usuario.setEdad(edad);
@@ -71,7 +73,9 @@ public class EditarUsusario extends HttpServlet {
 		
 		buser.cerrarconexion();
 		
-		request.getRequestDispatcher("ServletUsuario").forward(request, response);
+		request.getRequestDispatcher("EditarUsusario").forward(request, response);
+		
+		response.sendRedirect(request.getContextPath() + "/controlador/ServletUsuario");
 	}
 
 }
